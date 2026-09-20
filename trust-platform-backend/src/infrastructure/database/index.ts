@@ -1,0 +1,12 @@
+export { createSupabaseAdmin, createUserClient } from './supabaseClient.js';
+export { SupabaseUserRepository } from './SupabaseUserRepository.js';
+export { SupabaseWalletRepository } from './SupabaseWalletRepository.js';
+export { SupabaseAuditLogger } from './SupabaseAuditLogger.js';
+export { SupabaseTransactionLedgerRepository } from './SupabaseTransactionLedgerRepository.js';
+export { SupabaseEscrowRepository } from './SupabaseEscrowRepository.js';
+export { SupabaseDigitalGoodsListingRepository } from './SupabaseDigitalGoodsListingRepository.js';
+export { SupabaseProjectRepository } from './SupabaseProjectRepository.js';
+export { SupabaseMilestoneRepository } from './SupabaseMilestoneRepository.js';
+export { SupabaseGamingChallengeRepository } from './SupabaseGamingChallengeRepository.js';
+export { SupabaseMatchResultRepository } from './SupabaseMatchResultRepository.js';
+export { SupabaseNotificationRepository } from './SupabaseNotificationRepository.js';

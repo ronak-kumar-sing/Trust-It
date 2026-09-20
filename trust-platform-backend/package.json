@@ -1,0 +1,41 @@
+{
+  "name": "trust-platform-backend",
+  "version": "1.0.0",
+  "description": "Trust, Verification & Escrow Platform — Backend API",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": ["escrow", "trust", "fintech", "fastify"],
+  "author": "TrustVault",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/cors": "^11.3.0",
+    "@fastify/helmet": "^13.1.1",
+    "@fastify/rate-limit": "^11.2.0",
+    "@fastify/swagger": "^9.8.1",
+    "@fastify/swagger-ui": "^6.1.1",
+    "@supabase/supabase-js": "^2.116.0",
+    "bullmq": "^6.3.8",
+    "dayjs": "^1.11.23",
+    "fastify": "^5.12.5",
+    "fastify-plugin": "^6.0.0",
+    "ioredis": "^6.0.0",
+    "nanoid": "^6.0.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.2",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.1"
+  }
+}
