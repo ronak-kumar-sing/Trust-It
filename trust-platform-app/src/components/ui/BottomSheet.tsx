@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/colors';
 import { Typography } from '../../constants/typography';
 import { Spacing } from '../../constants/spacing';
@@ -53,7 +54,7 @@ export const BottomSheet: React.FC<BottomSheetProps> = React.memo(({
                   onPress={onClose}
                   style={styles.closeButton}
                 >
-                  <Text style={styles.closeButtonText}>✕</Text>
+                  <Ionicons name="close" size={20} color={Colors.textSecondary} />
                 </TouchableOpacity>
               </View>
 
@@ -75,11 +76,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   sheetContainer: {
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surface,
     borderTopLeftRadius: Spacing.borderRadiusLg,
     borderTopRightRadius: Spacing.borderRadiusLg,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
     paddingTop: Spacing.sm,
     paddingBottom: Spacing.xxl,
     paddingHorizontal: Spacing.lg,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 4,
     borderRadius: 2,
-    backgroundColor: Colors.borderDark,
+    backgroundColor: Colors.border,
     alignSelf: 'center',
     marginBottom: Spacing.md,
   },
@@ -107,24 +108,24 @@ const styles = StyleSheet.create({
     fontFamily: Typography.fontFamily.bold,
     fontSize: Typography.size.lg,
     fontWeight: Typography.weight.bold,
-    color: Colors.textPrimaryDark,
+    color: Colors.textPrimary,
   },
   subtitle: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.sm,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     marginTop: Spacing.xxs,
   },
   closeButton: {
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: Colors.surfaceDark,
+    backgroundColor: Colors.surfaceHighlight,
     alignItems: 'center',
     justifyContent: 'center',
   },
   closeButtonText: {
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.bold,
   },

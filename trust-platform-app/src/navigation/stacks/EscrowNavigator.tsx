@@ -22,7 +22,7 @@ export const EscrowNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          backgroundColor: Colors.backgroundDark,
+          backgroundColor: Colors.background,
         },
       }}
     >

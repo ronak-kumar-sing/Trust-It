@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { SettingsStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -56,10 +57,12 @@ export const AccountSettingsScreen: React.FC<Props> = ({ navigation }) => {
           accessibilityRole="button"
         >
           <View style={styles.menuItemLeft}>
-            <Text style={styles.menuIcon}>🛡️</Text>
+            <View style={[styles.menuIconContainer, { backgroundColor: '#EFF6FF' }]}>
+              <Ionicons name="shield-checkmark-outline" size={20} color="#1A56DB" />
+            </View>
             <Text style={styles.menuTitle}>{Strings.settings.security}</Text>
           </View>
-          <Text style={styles.menuArrow}>›</Text>
+          <Ionicons name="chevron-forward" size={18} color="#94A3B8" />
         </Pressable>
 
         <Pressable
@@ -68,10 +71,12 @@ export const AccountSettingsScreen: React.FC<Props> = ({ navigation }) => {
           accessibilityRole="button"
         >
           <View style={styles.menuItemLeft}>
-            <Text style={styles.menuIcon}>💬</Text>
+            <View style={[styles.menuIconContainer, { backgroundColor: '#FAF5FF' }]}>
+              <Ionicons name="chatbubble-ellipses-outline" size={20} color="#7C3AED" />
+            </View>
             <Text style={styles.menuTitle}>{Strings.settings.helpSupport}</Text>
           </View>
-          <Text style={styles.menuArrow}>›</Text>
+          <Ionicons name="chevron-forward" size={18} color="#94A3B8" />
         </Pressable>
       </View>
 
@@ -143,18 +148,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  menuIcon: {
-    fontSize: 20,
+  menuIconContainer: {
+    width: 36,
+    height: 36,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
     marginRight: Spacing.md,
   },
   menuTitle: {
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.bold,
     color: Colors.textPrimary,
-  },
-  menuArrow: {
-    fontSize: 20,
-    color: Colors.textMuted,
   },
   versionContainer: {
     alignItems: 'center',

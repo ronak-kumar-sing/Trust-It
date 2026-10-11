@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xs,
   },
   gameBadge: {
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surfaceHighlight,
     paddingHorizontal: Spacing.sm,
     paddingVertical: 2,
     borderRadius: 6,
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   gameText: {
     fontSize: Typography.size.xs,
     fontWeight: Typography.weight.bold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   prizeBox: {
     alignItems: 'flex-end',
@@ -268,7 +268,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderTopWidth: 1,
-    borderTopColor: Colors.borderLight,
+    borderTopColor: Colors.border,
     paddingTop: Spacing.sm,
   },
   stakeLabel: {
@@ -278,6 +278,6 @@ const styles = StyleSheet.create({
   stakeAmount: {
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
 });

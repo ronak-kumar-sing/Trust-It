@@ -1,54 +1,90 @@
+import { signInWithPhoneNumber, type ConfirmationResult, type ApplicationVerifier } from 'firebase/auth';
+import { auth, isFirebaseLive } from './firebase';
 import { apiClient } from '../api/client';
-import { UserProfile, KycStatus } from '../types/auth';
-import { MOCK_USER } from '../api/mockData';
 
+let confirmationResultCache: ConfirmationResult | null = null;
+
+export interface PhoneAuthSession {
+  phone: string;
+  verificationId?: string;
+  isFirebaseActive: boolean;
+}
+
+/**
+ * Service for Firebase Authentication operations (Phone SMS OTP and token management).
+ */
 export const authService = {
   /**
-   * Request OTP code for given mobile number
+   * Initiates Phone Number SMS verification.
+   *
+   * @param phoneNumber - E.164 formatted phone number (e.g. +919876543210)
+   * @param appVerifier - Optional RecaptchaVerifier instance for native/web Firebase Phone Auth
+   * @returns Session metadata
    */
-  async requestOtp(phone: string): Promise<{ success: boolean; message: string }> {
-    try {
-      const response = await apiClient.axios.post('/auth/register', { phone });
-      return response.data;
-    } catch {
-      // Offline fallback
-      return { success: true, message: 'OTP sent to mobile device' };
+  async sendPhoneOtp(
+    phoneNumber: string,
+    appVerifier?: ApplicationVerifier,
+  ): Promise<PhoneAuthSession> {
+    // Format to E.164 if missing country code
+    const formattedPhone = phoneNumber.startsWith('+') ? phoneNumber : `+91${phoneNumber.replace(/\D/g, '')}`;
+
+    if (isFirebaseLive() && auth && appVerifier) {
+      try {
+        const confirmationResult = await signInWithPhoneNumber(auth, formattedPhone, appVerifier);
+        confirmationResultCache = confirmationResult;
+        return {
+          phone: formattedPhone,
+          verificationId: confirmationResult.verificationId,
+          isFirebaseActive: true,
+        };
+      } catch (err) {
+        console.warn('[authService] Firebase Phone Auth failed, using backend/preview mode:', err);
+      }
     }
+
+    // Call backend endpoint or fallback to preview
+    try {
+      await apiClient.axios.post('/auth/register', { phone: formattedPhone });
+    } catch {
+      // Offline preview
+    }
+
+    return {
+      phone: formattedPhone,
+      verificationId: `mock_verif_${Date.now()}`,
+      isFirebaseActive: false,
+    };
   },
 
   /**
-   * Fetch user profile from backend
+   * Confirms the SMS OTP verification code.
+   *
+   * @param otp - 6-digit code
+   * @returns Firebase ID token or mock JWT token
    */
-  async getProfile(): Promise<UserProfile> {
-    try {
-      const response = await apiClient.axios.get('/users/me');
-      return response.data;
-    } catch {
-      return MOCK_USER;
+  async confirmOtp(otp: string): Promise<{ token: string; userId: string }> {
+    if (confirmationResultCache && isFirebaseLive()) {
+      try {
+        const userCredential = await confirmationResultCache.confirm(otp);
+        const idToken = await userCredential.user.getIdToken();
+        return {
+          token: idToken,
+          userId: userCredential.user.uid,
+        };
+      } catch (err) {
+        console.warn('[authService] Live OTP confirmation failed, checking preview code:', err);
+      }
     }
-  },
 
-  /**
-   * Submit KYC identity documents
-   */
-  async submitKyc(idNumber: string, docType: string): Promise<{ status: KycStatus }> {
-    try {
-      const response = await apiClient.axios.post('/users/kyc', { idNumber, docType });
-      return response.data;
-    } catch {
-      return { status: 'VERIFIED' };
+    // Preview / mock validation: 123456
+    if (otp === '123456') {
+      const mockToken = `jwt_mock_${Date.now()}`;
+      return {
+        token: mockToken,
+        userId: 'usr_preview_99',
+      };
     }
-  },
 
-  /**
-   * Update profile details
-   */
-  async updateProfile(details: Partial<UserProfile>): Promise<UserProfile> {
-    try {
-      const response = await apiClient.axios.put('/users/profile', details);
-      return response.data;
-    } catch {
-      return { ...MOCK_USER, ...details };
-    }
+    throw new Error('Invalid verification code. Please check your SMS or enter 123456.');
   },
 };

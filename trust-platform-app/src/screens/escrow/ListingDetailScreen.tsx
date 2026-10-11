@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { EscrowStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -106,7 +107,10 @@ export const ListingDetailScreen: React.FC<Props> = ({ route, navigation }) => {
       </Card>
 
       <Card style={styles.guaranteeCard} variant="flat">
-        <Text style={styles.guaranteeTitle}>🔒 24-Hour Autonomous Inspection Guarantee</Text>
+        <View style={styles.guaranteeHeader}>
+          <Ionicons name="shield-checkmark" size={18} color="#059669" style={styles.guaranteeIcon} />
+          <Text style={styles.guaranteeTitle}>24-Hour Autonomous Inspection Guarantee</Text>
+        </View>
         <Text style={styles.guaranteeDesc}>
           Your funds are held securely in the TrustVault smart escrow state machine. Credentials
           are revealed only after payment lock. You have 24 hours to inspect and test before funds
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: Typography.size.xxl,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     marginBottom: Spacing.lg,
   },
   sectionCard: {
@@ -193,7 +197,7 @@ const styles = StyleSheet.create({
   },
   sellerScoreBadge: {
     alignItems: 'center',
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surfaceHighlight,
     paddingHorizontal: Spacing.md,
     paddingVertical: 4,
     borderRadius: 8,
@@ -201,25 +205,32 @@ const styles = StyleSheet.create({
   sellerScoreNumber: {
     fontSize: Typography.size.base,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   sellerScoreLabel: {
     fontSize: Typography.size.xs,
     color: Colors.textMuted,
   },
   guaranteeCard: {
-    backgroundColor: 'rgba(2, 132, 199, 0.08)',
+    backgroundColor: 'rgba(5, 150, 105, 0.08)',
     borderRadius: 12,
     padding: Spacing.md,
     borderWidth: 1,
-    borderColor: 'rgba(2, 132, 199, 0.3)',
+    borderColor: 'rgba(5, 150, 105, 0.25)',
     marginBottom: Spacing.lg,
+  },
+  guaranteeHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  guaranteeIcon: {
+    marginRight: 6,
   },
   guaranteeTitle: {
     fontSize: Typography.size.xs,
     fontWeight: Typography.weight.bold,
-    color: Colors.info,
-    marginBottom: 4,
+    color: '#059669',
   },
   guaranteeDesc: {
     fontSize: Typography.size.xs,

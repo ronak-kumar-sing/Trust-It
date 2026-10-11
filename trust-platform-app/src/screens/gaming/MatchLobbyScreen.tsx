@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     fontSize: Typography.size.lg,
     fontFamily: Typography.fontFamily.mono,
     fontWeight: Typography.weight.bold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     letterSpacing: 1,
     marginBottom: Spacing.xs,
   },

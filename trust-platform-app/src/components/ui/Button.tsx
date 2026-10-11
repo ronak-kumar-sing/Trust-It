@@ -138,9 +138,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
   },
   variant_secondary: {
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surfaceHighlight,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
   },
   variant_outline: {
     backgroundColor: Colors.transparent,
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
     color: Colors.white,
   },
   textVariant_secondary: {
-    color: Colors.textPrimaryDark,
+    color: Colors.textPrimary,
   },
   textVariant_outline: {
     color: Colors.primary,
@@ -174,6 +174,6 @@ const styles = StyleSheet.create({
     opacity: 0.5,
   },
   disabledText: {
-    color: Colors.textMutedDark,
+    color: Colors.textMuted,
   },
 });

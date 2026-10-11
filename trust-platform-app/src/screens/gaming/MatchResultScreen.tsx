@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { GamingStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -48,18 +49,34 @@ export const MatchResultScreen: React.FC<Props> = ({ route, navigation }) => {
           style={[styles.outcomeBtn, outcome === 'WIN' && styles.winSelected]}
           onPress={() => setOutcome('WIN')}
         >
-          <Text style={[styles.outcomeText, outcome === 'WIN' && styles.winTextSelected]}>
-            🏆 {Strings.gaming.iWon}
-          </Text>
+          <View style={styles.outcomeContent}>
+            <Ionicons
+              name="trophy"
+              size={18}
+              color={outcome === 'WIN' ? Colors.success : Colors.textMuted}
+              style={styles.outcomeIcon}
+            />
+            <Text style={[styles.outcomeText, outcome === 'WIN' && styles.winTextSelected]}>
+              {Strings.gaming.iWon}
+            </Text>
+          </View>
         </Pressable>
 
         <Pressable
           style={[styles.outcomeBtn, outcome === 'LOSS' && styles.lossSelected]}
           onPress={() => setOutcome('LOSS')}
         >
-          <Text style={[styles.outcomeText, outcome === 'LOSS' && styles.lossTextSelected]}>
-            💀 {Strings.gaming.iLost}
-          </Text>
+          <View style={styles.outcomeContent}>
+            <Ionicons
+              name="close-circle"
+              size={18}
+              color={outcome === 'LOSS' ? Colors.danger : Colors.textMuted}
+              style={styles.outcomeIcon}
+            />
+            <Text style={[styles.outcomeText, outcome === 'LOSS' && styles.lossTextSelected]}>
+              {Strings.gaming.iLost}
+            </Text>
+          </View>
         </Pressable>
       </View>
 
@@ -107,11 +124,19 @@ const styles = StyleSheet.create({
   outcomeBtn: {
     flex: 1,
     backgroundColor: Colors.surface,
-    paddingVertical: Spacing.lg,
+    paddingVertical: Spacing.md,
     borderRadius: 12,
     alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
     borderColor: Colors.border,
+  },
+  outcomeContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  outcomeIcon: {
+    marginRight: 6,
   },
   winSelected: {
     borderColor: Colors.success,

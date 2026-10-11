@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { MainTabParamList } from './types';
@@ -15,7 +15,8 @@ import { SettingsNavigator } from './stacks/SettingsNavigator';
 const Tab = createBottomTabNavigator<MainTabParamList>();
 
 /**
- * MainNavigator manages the primary bottom-tab navigation across the platform.
+ * MainNavigator manages the primary bottom-tab navigation across the platform,
+ * styled to match the Stitch TrustVault tab bar with focused/unfocused states.
  */
 export const MainNavigator: React.FC = () => {
   return (
@@ -24,8 +25,8 @@ export const MainNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
         tabBarStyle: styles.tabBar,
-        tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.textMuted,
+        tabBarActiveTintColor: '#1A56DB',
+        tabBarInactiveTintColor: '#64748B',
         tabBarLabelStyle: styles.tabBarLabel,
       }}
     >
@@ -34,8 +35,8 @@ export const MainNavigator: React.FC = () => {
         component={HomeNavigator}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="shield-checkmark" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons name={focused ? 'home' : 'home-outline'} size={size} color={color} />
           ),
         }}
       />
@@ -44,8 +45,12 @@ export const MainNavigator: React.FC = () => {
         component={EscrowNavigator}
         options={{
           tabBarLabel: 'Escrow',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="key" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? 'shield-checkmark' : 'shield-checkmark-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -54,8 +59,12 @@ export const MainNavigator: React.FC = () => {
         component={FreelanceNavigator}
         options={{
           tabBarLabel: 'Freelance',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="code-slash" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? 'briefcase' : 'briefcase-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -64,8 +73,12 @@ export const MainNavigator: React.FC = () => {
         component={GamingNavigator}
         options={{
           tabBarLabel: 'Gaming',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="game-controller" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? 'game-controller' : 'game-controller-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -74,8 +87,12 @@ export const MainNavigator: React.FC = () => {
         component={WalletNavigator}
         options={{
           tabBarLabel: 'Wallet',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="wallet" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? 'wallet' : 'wallet-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -84,8 +101,12 @@ export const MainNavigator: React.FC = () => {
         component={SettingsNavigator}
         options={{
           tabBarLabel: 'Settings',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="settings-outline" size={size} color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? 'settings' : 'settings-outline'}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -95,15 +116,21 @@ export const MainNavigator: React.FC = () => {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: Colors.backgroundDark,
-    borderTopColor: Colors.border,
+    backgroundColor: '#FFFFFF',
+    borderTopColor: '#E2E8F0',
     borderTopWidth: 1,
-    height: 60,
-    paddingBottom: 6,
+    height: 64,
+    paddingBottom: 8,
     paddingTop: 6,
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.04,
+    shadowRadius: 4,
+    elevation: 4,
   },
   tabBarLabel: {
     fontSize: 10,
     fontWeight: Typography.weight.semibold,
+    letterSpacing: 0.2,
   },
 });

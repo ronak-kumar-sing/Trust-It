@@ -8,3 +8,4 @@ export { gamingRoutes, type GamingRoutesOptions } from './gamingRoutes.js';
 export { trustScoreRoutes, type TrustScoreRoutesOptions } from './trustScoreRoutes.js';
 export { notificationRoutes, type NotificationRoutesOptions } from './notificationRoutes.js';
 export { aiRoutes, type AiRoutesOptions } from './aiRoutes.js';
+export { storageRoutes, type StorageRoutesOptions } from './storageRoutes.js';

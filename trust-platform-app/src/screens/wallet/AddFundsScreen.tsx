@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { WalletStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -48,7 +49,10 @@ export const AddFundsScreen: React.FC<Props> = ({ navigation }) => {
       <Header title={Strings.wallet.addFunds} onBack={() => navigation.goBack()} />
 
       <Card style={styles.infoCard} variant="flat">
-        <Text style={styles.infoTitle}>⚡ Instant Escrow Wallet Deposit</Text>
+        <View style={styles.infoHeader}>
+          <Ionicons name="flash-outline" size={16} color={Colors.primary} style={styles.infoIcon} />
+          <Text style={styles.infoTitle}>Instant Escrow Wallet Deposit</Text>
+        </View>
         <Text style={styles.infoDesc}>
           Deposit via UPI, NetBanking, or Debit/Credit Cards. Zero gateway fees for Gold Tier traders.
         </Text>
@@ -120,11 +124,18 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     marginBottom: Spacing.md,
   },
+  infoHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  infoIcon: {
+    marginRight: 6,
+  },
   infoTitle: {
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.bold,
     color: Colors.textPrimary,
-    marginBottom: 4,
   },
   infoDesc: {
     fontSize: Typography.size.xs,

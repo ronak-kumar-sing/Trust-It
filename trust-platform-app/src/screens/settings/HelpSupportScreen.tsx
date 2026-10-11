@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     lineHeight: Typography.lineHeight.xs * 1.3,
   },
   bold: {
-    color: Colors.primaryLight,
+    color: Colors.primary,
     fontWeight: Typography.weight.bold,
   },
   sectionHeader: {

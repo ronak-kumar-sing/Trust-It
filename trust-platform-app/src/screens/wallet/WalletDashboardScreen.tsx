@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   },
   stateMachineTag: {
     fontSize: Typography.size.xs,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     fontWeight: Typography.weight.semibold,
   },
   list: {

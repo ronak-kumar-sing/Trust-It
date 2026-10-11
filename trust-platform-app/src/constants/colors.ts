@@ -57,21 +57,24 @@ export const Colors = {
   textMutedLight: '#94A3B8',
 
   // Overlays
-  backdrop: 'rgba(0, 0, 0, 0.65)',
+  backdrop: 'rgba(15, 23, 42, 0.5)',
   transparent: 'transparent',
   white: '#FFFFFF',
   black: '#000000',
 
-  // Active Theme Aliases
-  background: '#0A0D14',
-  surface: '#121620',
-  surfaceHighlight: '#1A202E',
-  border: '#232938',
-  textPrimary: '#F9FAFB',
-  textSecondary: '#9CA3AF',
-  textMuted: '#6B7280',
-  tierGold: '#F59E0B',
-  tierSilver: '#94A3B8',
+  // Active Theme Aliases (Rich Light Theme)
+  background: '#F8FAFC',
+  surface: '#FFFFFF',
+  surfaceHighlight: '#F1F5F9',
+  surfaceCard: '#FFFFFF',
+  surfaceElevated: '#FFFFFF',
+  border: '#E2E8F0',
+  borderSubtle: '#F1F5F9',
+  textPrimary: '#0F172A',
+  textSecondary: '#475569',
+  textMuted: '#64748B',
+  tierGold: '#D97706',
+  tierSilver: '#64748B',
   tierBronze: '#B45309',
 } as const;
 

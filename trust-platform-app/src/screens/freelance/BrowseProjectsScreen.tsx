@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, FlatList, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { FreelanceStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -109,7 +110,10 @@ export const BrowseProjectsScreen: React.FC<Props> = ({ navigation }) => {
       />
 
       <Card style={styles.qualityGateBanner} variant="flat">
-        <Text style={styles.gateBannerTitle}>🤖 Automated AI Quality Gates Active</Text>
+        <View style={styles.gateBannerHeader}>
+          <Ionicons name="hardware-chip-outline" size={16} color={Colors.primary} style={styles.gateIcon} />
+          <Text style={styles.gateBannerTitle}>Automated AI Quality Gates Active</Text>
+        </View>
         <Text style={styles.gateBannerDesc}>
           Milestone deliverables are checked for test coverage, vulnerabilities, and code drift
           before client 14-day review countdown triggers.
@@ -151,11 +155,18 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(26, 86, 219, 0.25)',
     marginBottom: Spacing.md,
   },
+  gateBannerHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  gateIcon: {
+    marginRight: 6,
+  },
   gateBannerTitle: {
     fontSize: Typography.size.xs,
     fontWeight: Typography.weight.bold,
-    color: Colors.primaryLight,
-    marginBottom: 4,
+    color: Colors.primary,
   },
   gateBannerDesc: {
     fontSize: Typography.size.xs,
@@ -190,7 +201,7 @@ const styles = StyleSheet.create({
   budgetVal: {
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   title: {
     fontSize: Typography.size.base,
@@ -214,7 +225,7 @@ const styles = StyleSheet.create({
   },
   barBg: {
     height: 5,
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.border,
     borderRadius: 3,
     overflow: 'hidden',
   },

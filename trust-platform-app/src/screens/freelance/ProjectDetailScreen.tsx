@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
   overviewBudget: {
     fontSize: Typography.size.lg,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   partnerInfo: {
     alignItems: 'flex-end',
@@ -225,13 +225,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderTopWidth: 1,
-    borderTopColor: Colors.borderLight,
+    borderTopColor: Colors.border,
     paddingTop: Spacing.sm,
   },
   msAmount: {
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   msTimer: {
     fontSize: Typography.size.xs,

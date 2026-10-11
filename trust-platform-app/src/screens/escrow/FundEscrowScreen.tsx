@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
   totalVal: {
     fontSize: Typography.size.lg,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   balanceCard: {
     backgroundColor: Colors.surface,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   noticeTitle: {
     fontSize: Typography.size.xs,
     fontWeight: Typography.weight.bold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     marginBottom: 4,
   },
   noticeText: {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ViewStyle } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/colors';
 import { Typography } from '../../constants/typography';
 import { Spacing } from '../../constants/spacing';
@@ -25,10 +26,11 @@ export const Header: React.FC<HeaderProps> = React.memo(({
         {onBack ? (
           <TouchableOpacity
             accessibilityLabel="Go back"
+            activeOpacity={0.7}
             onPress={onBack}
             style={styles.backButton}
           >
-            <Text style={styles.backArrow}>‹</Text>
+            <Ionicons color={Colors.textPrimary} name="arrow-back" size={20} />
           </TouchableOpacity>
         ) : null}
 
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: Spacing.md,
     borderBottomWidth: 1,
-    borderBottomColor: Colors.borderSubtleDark,
+    borderBottomColor: Colors.border,
     marginBottom: Spacing.md,
   },
   leftSection: {
@@ -70,18 +72,12 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 19,
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surfaceHighlight,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: Spacing.md,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
-  },
-  backArrow: {
-    color: Colors.textPrimaryDark,
-    fontSize: 28,
-    lineHeight: 30,
-    marginTop: -2,
+    borderColor: Colors.border,
   },
   titleContainer: {
     flex: 1,
@@ -90,12 +86,12 @@ const styles = StyleSheet.create({
     fontFamily: Typography.fontFamily.bold,
     fontSize: Typography.size.lg,
     fontWeight: Typography.weight.bold,
-    color: Colors.textPrimaryDark,
+    color: Colors.textPrimary,
   },
   subtitle: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.xs,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     marginTop: Spacing.xxs,
   },
   rightSection: {

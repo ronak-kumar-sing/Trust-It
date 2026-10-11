@@ -8,6 +8,7 @@ import {
   ViewStyle,
   TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/colors';
 import { Typography } from '../../constants/typography';
 import { Spacing } from '../../constants/spacing';
@@ -20,9 +21,9 @@ export interface InputProps extends Omit<TextInputProps, 'style'> {
   /** Helper descriptive text */
   helperText?: string;
   /** Prefix icon or symbol */
-  leftIcon?: React.ReactNode;
+  leftIcon?: React.ReactNode | keyof typeof Ionicons.glyphMap;
   /** Suffix icon or action */
-  rightIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode | keyof typeof Ionicons.glyphMap;
   /** Container style overrides */
   containerStyle?: ViewStyle;
   /** Mode: text, password, search, otp */
@@ -62,6 +63,20 @@ export const Input: React.FC<InputProps> = React.memo(({
     setIsPasswordVisible((prev) => !prev);
   }, []);
 
+  const renderIcon = (icon: React.ReactNode | string | undefined) => {
+    if (!icon) return null;
+    if (typeof icon === 'string') {
+      return (
+        <Ionicons
+          name={icon as any}
+          size={18}
+          color={isFocused ? Colors.primary : Colors.textMuted}
+        />
+      );
+    }
+    return icon;
+  };
+
   const isPassword = mode === 'password';
   const effectiveSecure = isPassword ? !isPasswordVisible : secureTextEntry;
 
@@ -76,14 +91,14 @@ export const Input: React.FC<InputProps> = React.memo(({
       {label ? <Text style={styles.label}>{label}</Text> : null}
 
       <View style={boxStyle}>
-        {leftIcon ? <View style={styles.leftIconWrapper}>{leftIcon}</View> : null}
+        {leftIcon ? <View style={styles.leftIconWrapper}>{renderIcon(leftIcon)}</View> : null}
 
         <TextInput
           accessibilityLabel={label}
           autoCapitalize="none"
           onBlur={handleBlur}
           onFocus={handleFocus}
-          placeholderTextColor={Colors.textMutedDark}
+          placeholderTextColor={Colors.textMuted}
           secureTextEntry={effectiveSecure}
           style={[styles.textInput, mode === 'otp' ? styles.textInputOtp : {}]}
           {...rest}
@@ -100,7 +115,7 @@ export const Input: React.FC<InputProps> = React.memo(({
             </Text>
           </TouchableOpacity>
         ) : rightIcon ? (
-          <View style={styles.rightIconWrapper}>{rightIcon}</View>
+          <View style={styles.rightIconWrapper}>{renderIcon(rightIcon)}</View>
         ) : null}
       </View>
 
@@ -123,15 +138,15 @@ const styles = StyleSheet.create({
     fontFamily: Typography.fontFamily.medium,
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.medium,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     marginBottom: Spacing.xs,
   },
   inputBox: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.surfaceDark,
+    backgroundColor: Colors.surface,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
     borderRadius: Spacing.borderRadiusMd,
     minHeight: Spacing.touchTargetMin,
     paddingHorizontal: Spacing.md,
@@ -150,7 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.base,
-    color: Colors.textPrimaryDark,
+    color: Colors.textPrimary,
     paddingVertical: Spacing.sm,
   },
   leftIconWrapper: {
@@ -174,7 +189,7 @@ const styles = StyleSheet.create({
   helperText: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.xs,
-    color: Colors.textMutedDark,
+    color: Colors.textMuted,
     marginTop: Spacing.xxs,
   },
 });

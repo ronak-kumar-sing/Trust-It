@@ -49,3 +49,8 @@ export type {
   GhostingRiskLevel,
   GhostingRecommendedAction,
 } from './IGhostingPredictor.js';
+export type { IStorageService } from './IStorageService.js';
+export type {
+  IFirebaseAuthService,
+  VerifiedFirebaseUser,
+} from './IFirebaseAuthService.js';

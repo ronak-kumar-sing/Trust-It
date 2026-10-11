@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { GamingStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -62,7 +63,10 @@ export const CvVerificationScreen: React.FC<Props> = ({ navigation }) => {
 
       {step >= 3 ? (
         <Card style={styles.payoutCard} variant="flat">
-          <Text style={styles.payoutTitle}>🎉 Match Verified: Victory Payout Settled</Text>
+          <View style={styles.payoutHeader}>
+            <Ionicons name="trophy-outline" size={20} color={Colors.success} style={styles.payoutIcon} />
+            <Text style={styles.payoutTitle}>Match Verified: Victory Payout Settled</Text>
+          </View>
           <Text style={styles.payoutAmount}>+₹1,980</Text>
           <Text style={styles.payoutDesc}>
             Directly credited to your available escrow wallet balance. Your Wager Rating increased
@@ -133,12 +137,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: Spacing.xxl,
   },
+  payoutHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: Spacing.xs,
+  },
+  payoutIcon: {
+    marginRight: 6,
+  },
   payoutTitle: {
     fontSize: Typography.size.base,
     fontWeight: Typography.weight.bold,
     color: Colors.success,
     textAlign: 'center',
-    marginBottom: Spacing.xs,
   },
   payoutAmount: {
     fontSize: Typography.size.xxl,

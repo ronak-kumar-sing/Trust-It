@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/colors';
 import { Typography } from '../../constants/typography';
 import { Spacing } from '../../constants/spacing';
@@ -26,7 +27,7 @@ export const EmptyState: React.FC<EmptyStateProps> = React.memo(({
   return (
     <View style={[styles.container, style]}>
       <View style={styles.iconCircle}>
-        {icon ?? <Text style={styles.defaultIconText}>📭</Text>}
+        {icon ?? <Ionicons name="cube-outline" size={32} color={Colors.textMuted} />}
       </View>
 
       <Text style={styles.title}>{title}</Text>
@@ -58,28 +59,25 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: '#F1F5F9',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: Spacing.md,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
-  },
-  defaultIconText: {
-    fontSize: 28,
+    borderColor: '#E2E8F0',
   },
   title: {
     fontFamily: Typography.fontFamily.bold,
     fontSize: Typography.size.md,
     fontWeight: Typography.weight.bold,
-    color: Colors.textPrimaryDark,
+    color: Colors.textPrimary,
     textAlign: 'center',
     marginBottom: Spacing.xs,
   },
   description: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.sm,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     textAlign: 'center',
     lineHeight: Typography.lineHeight.sm,
     maxWidth: 280,

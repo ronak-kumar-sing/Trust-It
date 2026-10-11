@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   repoUrl: {
     fontSize: Typography.size.xs,
     fontFamily: Typography.fontFamily.mono,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     marginBottom: Spacing.xs,
   },
   notesText: {

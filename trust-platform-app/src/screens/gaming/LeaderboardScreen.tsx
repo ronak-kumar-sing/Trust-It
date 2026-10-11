@@ -131,6 +131,6 @@ const styles = StyleSheet.create({
   },
   scoreText: {
     fontSize: Typography.size.xs,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
 });

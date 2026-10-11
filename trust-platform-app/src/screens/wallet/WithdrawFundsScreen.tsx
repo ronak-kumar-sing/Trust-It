@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   netVal: {
     fontSize: Typography.size.sm,
     fontWeight: Typography.weight.extrabold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
   },
   errorText: {
     color: Colors.danger,

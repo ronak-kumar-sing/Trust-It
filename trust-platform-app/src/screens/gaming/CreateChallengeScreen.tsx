@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   escrowTitle: {
     fontSize: Typography.size.xs,
     fontWeight: Typography.weight.bold,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     marginBottom: 4,
   },
   escrowText: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     fontWeight: Typography.weight.semibold,
   },
   gameCardTextSelected: {
-    color: Colors.primaryLight,
+    color: Colors.primary,
     fontWeight: Typography.weight.bold,
   },
   form: {

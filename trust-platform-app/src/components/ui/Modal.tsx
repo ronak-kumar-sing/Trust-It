@@ -10,6 +10,7 @@ import {
 import { Colors } from '../../constants/colors';
 import { Typography } from '../../constants/typography';
 import { Spacing } from '../../constants/spacing';
+import { Shadows } from '../../constants/shadows';
 import { Button, ButtonVariant } from './Button';
 import { Strings } from '../../constants/strings';
 
@@ -99,23 +100,24 @@ const styles = StyleSheet.create({
   dialogCard: {
     width: '100%',
     maxWidth: 380,
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surface,
     borderRadius: Spacing.borderRadiusLg,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
     padding: Spacing.xl,
+    ...Shadows.lg,
   },
   title: {
     fontFamily: Typography.fontFamily.bold,
     fontSize: Typography.size.lg,
     fontWeight: Typography.weight.bold,
-    color: Colors.textPrimaryDark,
+    color: Colors.textPrimary,
     marginBottom: Spacing.xs,
   },
   message: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.base,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     lineHeight: Typography.lineHeight.base,
     marginBottom: Spacing.md,
   },

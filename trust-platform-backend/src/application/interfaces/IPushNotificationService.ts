@@ -3,6 +3,7 @@ export interface PushNotificationPayload {
   title: string;
   body: string;
   data?: Record<string, unknown>;
+  deviceToken?: string;
 }
 
 export interface PushNotificationResult {

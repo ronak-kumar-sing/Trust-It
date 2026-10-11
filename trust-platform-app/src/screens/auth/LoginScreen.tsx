@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.md,
   },
   badgeText: {
-    color: Colors.primaryLight,
+    color: Colors.primary,
     fontSize: Typography.size.xs,
     fontWeight: Typography.weight.bold,
     letterSpacing: 1,

@@ -107,7 +107,11 @@ import {
   SupabaseMatchResultRepository,
   SupabaseNotificationRepository,
 } from './infrastructure/database/index.js';
-import { FirebaseFcmStub } from './infrastructure/notification/index.js';
+import { FirebaseFcmStub, FirebaseAdminPushService } from './infrastructure/notification/index.js';
+import { FirebaseStorageService } from './infrastructure/storage/FirebaseStorageService.js';
+import { FirebaseAuthService } from './infrastructure/auth/FirebaseAuthService.js';
+import { initFirebaseAdmin } from './infrastructure/firebase/firebaseAdmin.js';
+import type { IStorageService, IFirebaseAuthService } from './application/interfaces/index.js';
 import { RazorpayAdapter } from './infrastructure/payment/index.js';
 import {
   CodeQualityGateStub,
@@ -129,6 +133,7 @@ import {
   trustScoreRoutes,
   notificationRoutes,
   aiRoutes,
+  storageRoutes,
 } from './presentation/routes/index.js';
 
 /**
@@ -155,6 +160,8 @@ export interface AppDependencies {
   pushNotificationService?: IPushNotificationService;
   credentialVerifier?: ICredentialVerifier;
   ghostingPredictor?: IGhostingPredictor;
+  storageService?: IStorageService;
+  firebaseAuthService?: IFirebaseAuthService;
 }
 
 /**
@@ -318,8 +325,16 @@ export async function buildApp(
   const notificationRepo =
     dependencies?.notificationRepository ??
     new SupabaseNotificationRepository(supabaseAdmin);
+  // ── Firebase Infrastructure ──────────────────────────────────
+  initFirebaseAdmin(config);
+
   const pushService =
-    dependencies?.pushNotificationService ?? new FirebaseFcmStub();
+    dependencies?.pushNotificationService ?? new FirebaseAdminPushService();
+  const storageService =
+    dependencies?.storageService ??
+    new FirebaseStorageService(config.FIREBASE_STORAGE_BUCKET);
+  const firebaseAuthService =
+    dependencies?.firebaseAuthService ?? new FirebaseAuthService();
 
   // ── Application Use Cases ─────────────────────────────────────
   const registerUser = new RegisterUser(userRepo, walletRepo, auditLogger);
@@ -484,7 +499,7 @@ export async function buildApp(
   }
 
   // ── Middleware ────────────────────────────────────────────────
-  const authenticate = createAuthMiddleware(supabaseAdmin);
+  const authenticate = createAuthMiddleware(supabaseAdmin, firebaseAuthService);
 
   // ── Routes Registration ───────────────────────────────────────
   await app.register(authRoutes, {
@@ -579,6 +594,12 @@ export async function buildApp(
     prefix: `${API_PREFIX}/ai`,
     verifyDigitalCredentials,
     assessGhostingRisk,
+    authenticate,
+  });
+
+  await app.register(storageRoutes, {
+    prefix: `${API_PREFIX}/storage`,
+    storageService,
     authenticate,
   });
 

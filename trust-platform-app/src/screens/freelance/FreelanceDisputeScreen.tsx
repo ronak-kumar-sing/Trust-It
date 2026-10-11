@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { FreelanceStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -51,7 +52,10 @@ export const FreelanceDisputeScreen: React.FC<Props> = ({ route, navigation }) =
 
       {isDisputed ? (
         <Card style={styles.submittedCard} variant="flat">
-          <Text style={styles.submittedTitle}>⚠️ Continuity Pool Activated</Text>
+          <View style={styles.submittedIconBox}>
+            <Ionicons name="alert-circle-outline" size={32} color={Colors.warning} />
+          </View>
+          <Text style={styles.submittedTitle}>Continuity Pool Activated</Text>
           <Text style={styles.submittedDesc}>
             Milestone funds have been frozen. TrustVault's AI Code Arbiter will inspect git diffs
             and repository commit history. If ghosting is confirmed, funds can be reallocated to a
@@ -181,6 +185,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.danger,
     alignItems: 'center',
     marginTop: Spacing.lg,
+  },
+  submittedIconBox: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'rgba(217, 119, 6, 0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: Spacing.sm,
   },
   submittedTitle: {
     fontSize: Typography.size.base,

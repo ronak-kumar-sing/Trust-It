@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { Colors } from '../../constants/colors';
 import { Typography } from '../../constants/typography';
 import { Spacing } from '../../constants/spacing';
@@ -22,7 +23,7 @@ export const ErrorState: React.FC<ErrorStateProps> = React.memo(({
   return (
     <View style={[styles.container, style]}>
       <View style={styles.iconCircle}>
-        <Text style={styles.iconText}>⚠️</Text>
+        <Ionicons name="alert-circle-outline" size={32} color={Colors.danger} />
       </View>
 
       <Text style={styles.title}>{title}</Text>
@@ -61,9 +62,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(220, 38, 38, 0.3)',
   },
-  iconText: {
-    fontSize: 28,
-  },
   title: {
     fontFamily: Typography.fontFamily.bold,
     fontSize: Typography.size.md,
@@ -75,7 +73,7 @@ const styles = StyleSheet.create({
   message: {
     fontFamily: Typography.fontFamily.regular,
     fontSize: Typography.size.sm,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     textAlign: 'center',
     lineHeight: Typography.lineHeight.sm,
     maxWidth: 280,

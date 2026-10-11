@@ -61,6 +61,6 @@ Skeleton.displayName = 'Skeleton';
 
 const styles = StyleSheet.create({
   skeleton: {
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surfaceHighlight,
   },
 });

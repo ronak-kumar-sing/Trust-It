@@ -19,7 +19,7 @@ export const WalletNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          backgroundColor: Colors.backgroundDark,
+          backgroundColor: Colors.background,
         },
       }}
     >

@@ -55,19 +55,20 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   variant_flat: {
-    backgroundColor: Colors.surfaceCardDark,
+    backgroundColor: Colors.surface,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
+    ...Shadows.sm,
   },
   variant_elevated: {
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surface,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
     ...Shadows.md,
   },
   variant_outlined: {
     backgroundColor: Colors.transparent,
     borderWidth: 1,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
   },
 });

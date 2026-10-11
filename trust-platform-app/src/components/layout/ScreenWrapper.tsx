@@ -37,7 +37,7 @@ export const ScreenWrapper: React.FC<ScreenWrapperProps> = React.memo(({
 
   return (
     <SafeAreaView edges={safeAreaEdges} style={containerStyle}>
-      <StatusBar barStyle="light-content" backgroundColor={Colors.backgroundDark} />
+      <StatusBar barStyle="dark-content" backgroundColor={Colors.background} />
       {scrollable ? (
         <ScrollView
           contentContainerStyle={[styles.scrollContent, contentContainerStyle]}
@@ -69,7 +69,7 @@ ScreenWrapper.displayName = 'ScreenWrapper';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.backgroundDark,
+    backgroundColor: Colors.background,
   },
   scrollView: {
     flex: 1,

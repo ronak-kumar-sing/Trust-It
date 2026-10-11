@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { EscrowStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -46,7 +47,10 @@ export const InspectionWindowScreen: React.FC<Props> = ({ route, navigation }) =
       />
 
       <Card style={styles.vaultCard} variant="elevated">
-        <Text style={styles.vaultTitle}>🔐 Secured Credential Vault</Text>
+        <View style={styles.vaultHeader}>
+          <Ionicons name="key-outline" size={18} color={Colors.primary} style={styles.vaultIcon} />
+          <Text style={styles.vaultTitle}>Secured Credential Vault</Text>
+        </View>
         <Text style={styles.vaultDesc}>
           Credentials transferred from seller into your inspection custody. Test login and revoke
           prior session tokens within this window.
@@ -125,11 +129,18 @@ const styles = StyleSheet.create({
     borderColor: Colors.border,
     marginVertical: Spacing.md,
   },
+  vaultHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 4,
+  },
+  vaultIcon: {
+    marginRight: 6,
+  },
   vaultTitle: {
     fontSize: Typography.size.base,
     fontWeight: Typography.weight.bold,
     color: Colors.textPrimary,
-    marginBottom: 4,
   },
   vaultDesc: {
     fontSize: Typography.size.xs,
@@ -141,7 +152,7 @@ const styles = StyleSheet.create({
     marginTop: Spacing.xs,
   },
   secretBox: {
-    backgroundColor: Colors.surfaceElevatedDark,
+    backgroundColor: Colors.surfaceHighlight,
     padding: Spacing.md,
     borderRadius: 8,
     borderWidth: 1,
@@ -155,7 +166,7 @@ const styles = StyleSheet.create({
   secretText: {
     fontSize: Typography.size.sm,
     fontFamily: Typography.fontFamily.mono,
-    color: Colors.primaryLight,
+    color: Colors.primary,
     marginBottom: Spacing.sm,
     fontWeight: Typography.weight.bold,
   },

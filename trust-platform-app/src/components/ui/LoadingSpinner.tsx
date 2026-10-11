@@ -38,12 +38,12 @@ const styles = StyleSheet.create({
   },
   fullScreen: {
     flex: 1,
-    backgroundColor: Colors.backgroundDark,
+    backgroundColor: Colors.background,
   },
   message: {
     fontFamily: Typography.fontFamily.medium,
     fontSize: Typography.size.sm,
-    color: Colors.textSecondaryDark,
+    color: Colors.textSecondary,
     marginTop: Spacing.md,
   },
 });

@@ -3,6 +3,8 @@ import { UserProfile, KycStatus, TrustTier } from '../types/auth';
 import { apiClient } from '../api/client';
 import { MOCK_USER } from '../api/mockData';
 
+import { authService } from '../services/authService';
+
 export interface AuthState {
   token: string | null;
   user: UserProfile | null;
@@ -43,12 +45,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   loginWithPhone: async (phone: string) => {
     set({ isLoading: true, error: null });
     try {
-      // Calls Fastify backend endpoint or falls back gracefully
-      try {
-        await apiClient.axios.post('/auth/register', { phone });
-      } catch {
-        // Fallback for offline/preview mode
-      }
+      await authService.sendPhoneOtp(phone);
       set({ isLoading: false });
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Failed to send OTP';
@@ -57,22 +54,22 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
 
-  verifyOtp: async (_phone: string, otp: string) => {
+  verifyOtp: async (phone: string, otp: string) => {
     set({ isLoading: true, error: null });
     try {
-      if (otp === '123456') {
-        const fakeToken = `jwt_mock_${Date.now()}`;
-        apiClient.setToken(fakeToken);
-        set({
-          token: fakeToken,
-          user: MOCK_USER,
-          isAuthenticated: true,
-          isLoading: false,
-        });
-        return true;
-      } else {
-        throw new Error('Invalid verification code. Use 123456 in preview.');
-      }
+      const { token, userId } = await authService.confirmOtp(otp);
+      apiClient.setToken(token);
+      set({
+        token,
+        user: {
+          ...MOCK_USER,
+          id: userId,
+          phone,
+        },
+        isAuthenticated: true,
+        isLoading: false,
+      });
+      return true;
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : 'Verification failed';
       set({ error: message, isLoading: false });

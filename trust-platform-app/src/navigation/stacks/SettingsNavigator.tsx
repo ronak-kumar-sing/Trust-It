@@ -18,7 +18,7 @@ export const SettingsNavigator: React.FC = () => {
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          backgroundColor: Colors.backgroundDark,
+          backgroundColor: Colors.background,
         },
       }}
     >

@@ -1,8 +1,8 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
-import { Provider as PaperProvider, MD3DarkTheme } from 'react-native-paper';
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
+import { Provider as PaperProvider, MD3LightTheme } from 'react-native-paper';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Colors } from './src/constants/colors';
 import { RootNavigator } from './src/navigation/RootNavigator';
@@ -17,24 +17,24 @@ const queryClient = new QueryClient({
 });
 
 const navigationTheme = {
-  ...DarkTheme,
+  ...DefaultTheme,
   colors: {
-    ...DarkTheme.colors,
+    ...DefaultTheme.colors,
     primary: Colors.primary,
-    background: Colors.backgroundDark,
-    card: Colors.surfaceDark,
-    text: Colors.textPrimaryDark,
-    border: Colors.borderDark,
+    background: Colors.background,
+    card: Colors.surface,
+    text: Colors.textPrimary,
+    border: Colors.border,
   },
 };
 
 const paperTheme = {
-  ...MD3DarkTheme,
+  ...MD3LightTheme,
   colors: {
-    ...MD3DarkTheme.colors,
+    ...MD3LightTheme.colors,
     primary: Colors.primary,
-    background: Colors.backgroundDark,
-    surface: Colors.surfaceDark,
+    background: Colors.background,
+    surface: Colors.surface,
   },
 };
 
@@ -47,7 +47,7 @@ export default function App() {
       <QueryClientProvider client={queryClient}>
         <PaperProvider theme={paperTheme}>
           <NavigationContainer theme={navigationTheme}>
-            <StatusBar style="light" />
+            <StatusBar style="dark" />
             <RootNavigator />
           </NavigationContainer>
         </PaperProvider>

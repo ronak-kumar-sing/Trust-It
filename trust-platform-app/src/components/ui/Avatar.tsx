@@ -75,17 +75,17 @@ Avatar.displayName = 'Avatar';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.primaryDark,
+    backgroundColor: Colors.primaryLight,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'relative',
     borderWidth: 1.5,
-    borderColor: Colors.borderDark,
+    borderColor: Colors.border,
   },
   initials: {
     fontFamily: Typography.fontFamily.bold,
     fontWeight: Typography.weight.bold,
-    color: Colors.white,
+    color: Colors.primary,
   },
   initialsSm: {
     fontSize: Typography.size.xs,
@@ -105,6 +105,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     backgroundColor: Colors.success,
     borderWidth: 2,
-    borderColor: Colors.surfaceDark,
+    borderColor: Colors.surface,
   },
 });

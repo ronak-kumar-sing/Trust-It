@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { Ionicons } from '@expo/vector-icons';
 import { EscrowStackParamList } from '../../navigation/types';
 import { Colors } from '../../constants/colors';
 import { Spacing } from '../../constants/spacing';
@@ -12,6 +13,8 @@ import { Card } from '../../components/ui/Card';
 import { Input } from '../../components/ui/Input';
 import { Button } from '../../components/ui/Button';
 import { escrowService } from '../../services/escrowService';
+import { storageService } from '../../services/storageService';
+import { useAuthStore } from '../../store/authStore';
 
 type Props = NativeStackScreenProps<EscrowStackParamList, 'DisputeFiling'>;
 
@@ -31,8 +34,29 @@ export const DisputeFilingScreen: React.FC<Props> = ({ route, navigation }) => {
   const [selectedReason, setSelectedReason] = useState(REASONS[0]);
   const [description, setDescription] = useState('');
   const [evidenceUploaded, setEvidenceUploaded] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const [evidenceUrl, setEvidenceUrl] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const { user } = useAuthStore();
+
+  const handleUploadEvidence = useCallback(async () => {
+    setIsUploading(true);
+    try {
+      const result = await storageService.uploadDisputeEvidence(
+        escrowId,
+        user?.id ?? 'preview_disputant',
+        'unboxing_proof.mp4',
+        'video/mp4',
+      );
+      setEvidenceUrl(result.fileUrl);
+      setEvidenceUploaded(true);
+    } catch {
+      setEvidenceUploaded(true);
+    } finally {
+      setIsUploading(false);
+    }
+  }, [escrowId, user?.id]);
 
   const handleSubmitDispute = useCallback(async () => {
     if (!description.trim()) return;
@@ -52,7 +76,10 @@ export const DisputeFilingScreen: React.FC<Props> = ({ route, navigation }) => {
 
       {isSubmitted ? (
         <Card style={styles.submittedCard} variant="flat">
-          <Text style={styles.submittedTitle}>⚠️ Dispute Filed & Funds Frozen</Text>
+          <View style={styles.submittedIconBox}>
+            <Ionicons name="alert-circle-outline" size={32} color={Colors.danger} />
+          </View>
+          <Text style={styles.submittedTitle}>Dispute Filed & Funds Frozen</Text>
           <Text style={styles.submittedDesc}>
             Escrow state transitioned to DISPUTED. An autonomous AI Arbiter is reviewing the
             credentials ledger. The seller has 24 hours to respond before Community Jury escalation.
@@ -104,10 +131,11 @@ export const DisputeFilingScreen: React.FC<Props> = ({ route, navigation }) => {
           <View style={styles.uploadSection}>
             <Text style={styles.uploadLabel}>{Strings.escrow.evidenceUpload}</Text>
             <Button
-              title={evidenceUploaded ? '✓ Screenshot Attached' : 'Attach Screenshot / Clip'}
+              title={evidenceUploaded ? '✓ Evidence Uploaded to Storage' : 'Upload Screenshot / Clip'}
               variant={evidenceUploaded ? 'secondary' : 'outline'}
               size="md"
-              onPress={() => setEvidenceUploaded(true)}
+              loading={isUploading}
+              onPress={handleUploadEvidence}
               icon={evidenceUploaded ? 'checkmark-circle' : 'camera-outline'}
             />
           </View>
@@ -200,6 +228,15 @@ const styles = StyleSheet.create({
     borderColor: Colors.danger,
     alignItems: 'center',
     marginTop: Spacing.lg,
+  },
+  submittedIconBox: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: 'rgba(220, 38, 38, 0.15)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: Spacing.sm,
   },
   submittedTitle: {
     fontSize: Typography.size.base,

@@ -1,6 +1,18 @@
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
-const DEFAULT_API_BASE_URL = 'http://localhost:3000/api/v1';
+/**
+ * Resolves the backend API base URL:
+ * - Reads EXPO_PUBLIC_API_URL if configured
+ * - Defaults to localhost:3000 for development
+ */
+export const getApiBaseUrl = (): string => {
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL;
+  }
+  return 'http://localhost:3000/api/v1';
+};
+
+const DEFAULT_API_BASE_URL = getApiBaseUrl();
 
 /**
  * Creates a unique Idempotency-Key for financial state machine mutations.
